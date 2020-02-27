@@ -32,26 +32,16 @@ void Alien::move()
             //scene()->removeItem(this);
             delete colliding_items[i];
             //delete this;
+            /*
+             * no se debe dar delete al objeto Alien
+             * porque en el momento que borramos el objeto Jugador
+             * se borra el objeto Alien que se creo dentro de él.
+             */
 
-            QMessageBox msgBox;
-            msgBox.setText("Game Over.");
-            msgBox.setInformativeText("Quieres reintentar?");
-            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-            msgBox.setDefaultButton(QMessageBox::No);
-            int ret = msgBox.exec();
-            if(ret==QMessageBox::Yes){
-                Form *f=new Form;
-                f->show();
-                form->close();
-            }
-            else if(ret==QMessageBox::No){
-                Widget *w=new Widget;
-                w->show();
-                form->close();
-            }
-            else{
-                form->close();
-            }
+            QMessageBox::information(form, "Game Over", "Perdiste wexd.");
+            Widget *w=new Widget;
+            w->show();
+            form->close();
         }
         return;
     }

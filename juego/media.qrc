@@ -9,5 +9,6 @@
         <file>meteorito.png</file>
         <file>asteroide.png</file>
         <file>fondo.png</file>
+        <file>icono.ico</file>
     </qresource>
 </RCC>

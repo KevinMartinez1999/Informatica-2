@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Widget</string>
+   <string>Alien-X</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="media.qrc">
+    <normaloff>:/images/extraterrestre.png</normaloff>:/images/extraterrestre.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">#Widget{
@@ -110,6 +114,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="media.qrc"/>
+ </resources>
  <connections/>
 </ui>
