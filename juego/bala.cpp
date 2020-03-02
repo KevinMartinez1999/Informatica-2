@@ -5,10 +5,12 @@
 #include <alien.h>
 #include "form.h"
 
-extern Form *form;
-
 Bala::Bala(QObject *parent) : QObject(parent)
 {
+    /*
+     *Establece la imagen de la bala y un timer con el movimiento
+     *de la bala.
+     */
     setPixmap(QPixmap(":/images/bala.png"));
     QTimer * timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
@@ -26,8 +28,6 @@ void Bala::move()
                 //form->score->increase();
 
                 // remove them from the scene (still on the heap)
-                scene()->removeItem(colliding_items[i]);
-                scene()->removeItem(this);
 
                 // delete them from the heap to save memory
                 delete colliding_items[i];

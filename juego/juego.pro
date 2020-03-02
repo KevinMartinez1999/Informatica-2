@@ -21,6 +21,7 @@ SOURCES += \
     form.cpp \
     jugador.cpp \
     main.cpp \
+    opciones.cpp \
     widget.cpp
 
 HEADERS += \
@@ -28,10 +29,12 @@ HEADERS += \
     bala.h \
     form.h \
     jugador.h \
+    opciones.h \
     widget.h
 
 FORMS += \
     form.ui \
+    opciones.ui \
     widget.ui
 
 # Default rules for deployment.
