@@ -19,7 +19,7 @@ Jugador::Jugador(QObject *parent) : QObject(parent)
     QTimer *timer=new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(moveLeft()));
     connect(timer, SIGNAL(timeout()), this, SLOT(moveRight()));
-    timer->start(20);
+    timer->start(10);
 
 }
 
@@ -64,7 +64,7 @@ void Jugador::moveLeft()
 {
     if(banLeft==1){
         if(pos().x()>0){
-            setPos(x()-10, y());
+            setPos(x()-3, y());
         }
     }
 }
@@ -73,7 +73,7 @@ void Jugador::moveRight()
 {
     if(banRight==1){
         if(pos().x()<650){
-            setPos(x()+10, y());
+            setPos(x()+3, y());
         }
     }
 }

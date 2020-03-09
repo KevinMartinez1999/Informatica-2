@@ -40,7 +40,6 @@ void Alien::move()
             //Al remover el objeto jugador, se remueve tambien
             //el objeto alien porque jugador es su padre.
             delete jugador;
-            delete jugador2;
             /*
              * no se debe dar delete al objeto Alien
              * porque en el momento que borramos el objeto Jugador

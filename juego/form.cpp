@@ -39,7 +39,7 @@ Form::Form(QWidget *parent) :
         escena->addItem(jugador);
 
         //agregar jugador 2
-        jugador2=new Jugador(escena);
+        jugador2=new Jugador(jugador);
         jugador2->setPixmap(QPixmap(":/images/cohete2.png"));
         jugador2->setPos(280,450);
         escena->addItem(jugador2);
@@ -70,7 +70,7 @@ void Form::keyPressEvent(QKeyEvent *event)
         jugador->setBanderaRight();
     }
     else if(event->key()==Qt::Key_V){
-        bala1=new Bala(escena);
+        bala1=new Bala(jugador);
         bala1->setPos(jugador->x()+45,jugador->y());
         escena->addItem(bala1);
     }
@@ -84,7 +84,7 @@ void Form::keyPressEvent(QKeyEvent *event)
     }
     else if(event->key()==Qt::Key_P){
         if(pj2){
-            bala2=new Bala(escena);
+            bala2=new Bala(jugador);
             bala2->setPos(jugador2->x()+45,jugador2->y());
             escena->addItem(bala2);
         }
