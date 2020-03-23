@@ -1,0 +1,111 @@
+\documentclass[11pt]{article}
+\usepackage{UF_FRED_paper_style}
+%% ===============================================
+%% Setting the line spacing (3 options: only pick one)
+% \doublespacing
+% \singlespacing
+\onehalfspacing
+%% ===============================================
+
+\setlength{\droptitle}{-5em} %% Don't touch
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SET THE TITLE
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% TITLE:
+\title{Crisis de los fundamentos y la computación moderna
+\thanks{Documento seleccionado preparado para su presentación en el curso Informática II en el mes de marzo del 2020.}
+}
+
+% AUTHORS:
+\author{Kevin David Martinez Zapata\\% Name author
+    \href{mailto:kevin.martinez1@udea.edu.co}{\texttt{kevin.martinez1@udea.edu.co}}
+    }
+    
+% DATE:
+\date{Marzo 27, 2020}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABSTRACT
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\setstretch{1}
+\maketitle
+% %%%%%%%%%%%%%%%%%%
+\begin{abstract}
+% CONTENT OF ABS HERE--------------------------------------
+
+Así como a lo largo de la historia, las guerras han dado paso a grandes innovaciones tecnológicas como fue el radar, ultrasonido, máscaras antigás, etc. Hubo un periodo de la historia situado en el siglo XX donde se llevó a cabo una investigación profunda de los fundamentos matemáticos, que, aunque estuviesen justificados se pusieron en duda debido a la aparición de varias paradojas como la de Russell o la definición vaga del infinito, que más tarde Georg Cantor daría su definición formal.
+
+Esta llamada crisis de los fundamentos dio a conocer a muchos grandes matemáticos como lo fueron el gran Hilbert, Gödel y Alan Turing, entre otros. Que gracias a sus aportes a las matemáticas y la lógica pusieron las bases para la computación tal y como la conocemos.
+
+\citet{LaGaceta}
+
+\end{abstract}
+}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BODY OF THE DOCUMENT
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------
+\section{Introduccíon}
+% --------------------
+La ciencia de la computación parte del siglo XIX con matemáticos famosos como Gauss, Cauchy, Abel, Riemann, etc. Personas que formalizaron nuevas ideas, métodos y concepciones más universales de las matemáticas, pero hay dos grandes matemáticos que sentaron las bases de la computación, George Boole y Georg Cantor.
+
+Boole era un matemático y lógico británico, inventor de la conocida lógica de Boole y gracias a esto es considerado fundador de la aritmética computacional moderna. Mas tarde Georg Cantor, con ayuda de Dedekind y Frege crearon la teoría de conjuntos, base de las matemáticas modernas.
+
+Gracias a las bases que sentaron Boole y Cantor se abrían un mundo de posibilidades, pero a su vez muchas preguntas al respecto. Llegado el siglo XX, el descubrimiento de las paradojas y la lista de los 23 problemas matemáticos de David Hilbert propuestos en la conferencia de parís del congreso internacional de matemáticos de 1900, fueron unas de las razones por las que inicio la crisis de los fundamentos matemáticos, siendo el entscheidungsproblem o problema de decisión el más famoso. La solución es este problema es atribuida a Alan Turing, padre de la computación e informática moderna.
+
+\citet{Wiki}
+% --------------------
+\section{Desarrollo}
+
+Gottlob Frege, fue el primero en afirmar que las matemáticas son una parte de la lógica, y que esta puede ser construida a partir de procedimiento lógicos. En su obra, Grundgesetze der Arithmetik (2 vol. 1893-1903), Frege trata de sentar la matemática sobre bases lógicas. Mas tarde Russell presenta la paradoja del barbero, donde propone que “S es un elemento de S si y solo si S no es un elemento de S”, esto es claramente un absurdo que logra demostrar que la teoría original de conjuntos de Cantor y Frege es contradictoria. Russell para evitar mas paradojas propone el enunciado “Aquello que presupone la totalidad de un conjunto no debe formar parte del conjunto”, pero tenia el problema de que dejaba por fuera algunos conceptos matemáticos que era muy útiles.
+
+Este y muchos otros problemas fueron los que empezaron a generar dudas sobre los fundamentos de las matemáticas debido a que algunos matemáticos en el siglo XVIII desarrollando el cálculo impuesto por Isaac Newton y Leibniz, y la geometría de René Descartes, maravillados con sus aplicaciones en la física, la mecánica, la astronomía y la geometría, omitieron en gran parte los fundamentos. Estos matemáticos decían que “una cantidad que es aumentada o disminuida en un infinitesimal no es aumentada ni disminuida”, lo que demuestra que estos matemáticos usaban el calculo sin conocer sus conceptos fundamentales y limitaciones. Este hecho fue notablemente promotor de la crisis que vendría un par de siglos más tarde.
+
+\citet{mario}
+
+\subsection{Hilbert y el formalismo}
+
+Hilbert es recordado como uno de los matemáticos mas grandes del siglo XX, desarrollando una gran cantidad de ideas como la axiomatización de la geometría, la teoría de invariantes y su noción de espacio; hizo aportes a la mecánica cuántica y a la relatividad general, mostro la diferencia entre metamatemática y matemática, entre otros grandes aportes. Hilbert que es un seguidor del formalismo, no apoya en nada al logicismo, este dice que la matemática no puede describirse únicamente con recursos lógicos. Una vez más las matemáticas se tambalean en un hilo de dudas debido a las declaraciones de Hilbert que tenía una gran reputación. Hilbert no quería demostrar que la matemática era verdadera como querían los seguidores del logicismo sino más bien consistente, así es como propone un método de llamado formalismo que comprende tres puntos principales: La axiomatización, que dice que las primeras propiedades deben seguir una regla, ser consistentes; La formulación, que dice que los axiomas deben ser presentador de forma simbólica; Por último, la demostración de la compatibilidad de los axiomas. El interés de Hilbert era construir u conjunto de axiomas capaz de mostrar que las matemáticas eran consistentes, sin embargo, todo esto duró poco debido a Gödel y su teoría de la incompletitud, donde demuestra que cualquier sistema de axiomas que incluya los números naturales ya es incompleto o contradictorio.
+
+\citet{hilbert}
+\citet{incompletitud}
+
+% --------------------
+\subsection{Alan Turing y su máquina universal}
+% --------------------
+
+El entscheidungsproblem o problema de decisión fue uno de los más famosos que propuso Hilbert; el problema consistía en buscar un algoritmo general que pudiese verificar si una fórmula de cálculo de primer orden era un teorema.
+
+\citet{Wiki2}
+
+No fue hasta 1936 que Alan Turing y Alonzo Church dieron solución a este problema demostrando que era imposible escribir tal algoritmo. Alan Turing que fue matemático, lógico y criptógrafo, contribuyo a la segunda guerra mundial descifrando los códigos de las maquinas enigma del ejército nazi. Uno de sus aportes mas grandes a la computación fue la maquina universal de Turing, máquina que, viéndolo de forma didáctica, cuenta con una cinta muy larga y un autómata que se mueve en ella siguiendo ciertas instrucciones, como ejemplo podemos pensar en un trabajador que debe ejecutar unas ordenes de su jefe,  así pues la persona puede seguir un conjunto de reglas que se han impuesto con anticipación para así cumplir con el trabajo sin ningún tipo de ingenio o conocimiento del tema durante el tiempo que sea necesario.Hoy podemos ver esta ejemplificación en un computador moderno, diciendo que la cinta es el disco duro del computador y que dicho autómata es el procesador del computador que lo hace es seguir instrucciones. Así, Alan Turing logra formalizar los conceptos de algoritmo y computación. Luego presenta la tesis de Church – Turing que serian un conjunto de instrucciones que serian ejecutados por un autómata programable. Este test fue un gran aporte al campo de la inteligencia artificial ya que puede medir la inteligencia de una máquina. Turing dijo que cualquier algoritmo podía ser efectuado en una maquina de Turing, este hecho es un teorema matemático, es una afirmación que no se puede demostrar, pero se tomó como una concepción universal. Alan Turing pensó que los procesos se podían automatizar y lo logró, convirtiéndose así en el padre de la computación y precursor de la informática moderna.
+
+\citet{turing}
+
+% --------------------
+\section{Conclusión}
+% --------------------
+
+Es cierto cientos de años atrás se crearon aparatos como el ábaco que fue la primera maquina para contar que puede decirse que fue una concepción computacional ya que es un aparato que alberga información y da solución a problemas con un simple algoritmo que es mover bolas a través de una barra. Así mismo pasando por la maquina de contar de Pascal o Pascalina, la maquina analítica de Charles Babbage, etc. Pero fue hasta el siglo XX que Hilbert impulso en gran parte la computación haciéndose con la solución de muchos de los problemas de fundamentos y planteando los problemas de inspiraron a muchos matemáticos de la época como Alan Turing y Alonzo Church a resolverlos y aún más, a diseñar nuevas metodologías e ideas como la máquina de Turing que fue, aunque muy sencilla, la primera idea de lo que sería un computador moderno.
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENCES SECTION
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\medskip
+
+\bibliography{references.bib} 
+
+\end{document}
