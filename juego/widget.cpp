@@ -6,6 +6,7 @@
 
 Form *form;
 int numero_de_jugadores=1; //Variable global para saber cuantos jugadores serán
+int dificultad=2;
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)

@@ -62,18 +62,14 @@ void Jugador::spawn()
 
 void Jugador::moveLeft()
 {
-    if(banLeft==1){
-        if(pos().x()>0){
+    if(banLeft==1)
+        if(pos().x()>0)
             setPos(x()-3, y());
-        }
-    }
 }
 
 void Jugador::moveRight()
 {
-    if(banRight==1){
-        if(pos().x()<650){
+    if(banRight==1)
+        if(pos().x()<650)
             setPos(x()+3, y());
-        }
-    }
 }

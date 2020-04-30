@@ -7,12 +7,16 @@ Jugador *jugador;
 Jugador *jugador2;
 
 extern int numero_de_jugadores;
+extern int dificultad;
 
 Form::Form(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Form)
 {
     ui->setupUi(this);
+
+    qDebug()<<"Numero de jugadores: "<<numero_de_jugadores;
+    qDebug()<<"Dificultad: "<<dificultad;
 
     //agregar escena
     escena=new QGraphicsScene(this);
@@ -107,10 +111,9 @@ void Form::keyReleaseEvent(QKeyEvent *event)
         if(pj2)
             jugador2->resetBanderaLeft();
     }
-    else if(event->key()==Qt::Key_L){
+    else if(event->key()==Qt::Key_L)
         if(pj2)
             jugador2->resetBanderaRight();
-    }
 }
 
 Form::~Form()
