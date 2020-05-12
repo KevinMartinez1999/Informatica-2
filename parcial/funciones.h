@@ -2,8 +2,11 @@
 #define FUNCIONES_H
 
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include <fstream>
-#include <string>
+#include <string.h>
 
 using namespace std;
 
@@ -26,8 +29,8 @@ void ofertar_asientos();
 void generar_reporte();
 
 void user();
-void mostrar_funciones();
-void seleccionar_asiento();
+int mostrar_funciones();
+int seleccionar_asiento();
 
 void menu(){
     int a=0;
@@ -88,32 +91,62 @@ void generar_reporte(){
 }
 
 void user(){
-    int a=0;
-    do{
-        limpiar_pantalla();
-        cout<<"1. Mostrar funciones\n";
-        cout<<"2. Seleccionar asientos\n";
-        cout<<"3. Salir\n";
-        cout<<"Selecciones una: "; cin>>a;
-        switch (a) {
-        case 1:
-            mostrar_funciones();
-            break;
-        case 2:
-            seleccionar_asiento();
-            break;
-        default:
-            break;
+    limpiar_pantalla();
+    int a=mostrar_funciones();
+    int b=seleccionar_asiento();
+    cout<<a<<endl;
+}
+
+int mostrar_funciones(){
+    int cont, op=0;
+    cout<<endl;
+    cout<<"<----------------------------"
+          "----------FUNCIONES----------"
+          "---------------------------->\n\n";
+    printf("%2s", "ID"); printf("%20s ", "Nombre"); printf("%10s ", "Genero"); printf("%10s ", "Duracion");
+    printf("%10s ", "Sala"); printf("%10s ", "Hora"); printf("%10s ", "Asientos"); printf("%10s\n\n", "Clasif.");
+    string contenido;
+    char *token;
+    ifstream file("../parcial/cartelera.txt");
+    while(!file.eof()){
+        cont=0;
+        getline(file, contenido);
+        char cadena[100]="";
+        for(int i=0; i<int(contenido.size()); i++)
+            cadena[i]=contenido[i];
+        token=strtok(cadena, ",");
+        cout<<token<<" ";
+        while(token!=NULL){
+            token=strtok(NULL, ",");
+            if(cont==0){
+                if(token!=NULL){
+                    printf("%20s ", token);
+                }
+            }
+            else{
+                if(token!=NULL){
+                    printf("%10s ", token);
+                }
+            }
+            cont++;
         }
-    }while(a!=3);
+        cout<<endl;
+    }
+    file.close();
+    cout<<"\nSEleccione una: "; cin>>op;
+    return op;
 }
 
-void mostrar_funciones(){
-
-}
-
-void seleccionar_asiento(){
-
+int seleccionar_asiento(){
+    limpiar_pantalla();
+    int op;
+    printf("%4s  ", "Tipo"); printf("%13s  ", "Clasificacion"); printf("%6s\n\n", "Costo");
+    printf("%4s  ", "1"); printf("%13s  ", "General 2D"); printf("%6s\n", "7900$");
+    printf("%4s  ", "2"); printf("%13s  ", "General 3D"); printf("%6s\n", "10800$");
+    printf("%4s  ", "3"); printf("%13s  ", "VibroSound 2D"); printf("%6s\n", "9900$");
+    printf("%4s  ", "4"); printf("%13s  ", "VibroSound 3D"); printf("%6s\n", "11900$");
+    cout<<"\nSeleccione una: "; cin>>op;
+    return op;
 }
 
 #endif // FUNCIONES_H

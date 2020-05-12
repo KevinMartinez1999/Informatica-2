@@ -1,0 +1,3 @@
+1,El aro,terror,120,4,7,100,18+,
+2,Bob esponja,infantil,100,5,7,100,6+,
+3,El aro 2,terror,140,6,7,120,18+,
