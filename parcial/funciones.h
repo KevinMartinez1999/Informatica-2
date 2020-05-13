@@ -30,7 +30,9 @@ void generar_reporte();
 
 void user();
 int mostrar_funciones();
-int seleccionar_asiento();
+string seleccionar_funcion(int a);
+void seleccionar_asiento(string);
+void imprimir_sala(int);
 
 void menu(){
     int a=0;
@@ -54,47 +56,23 @@ void menu(){
 }
 
 void admin(){
-    int a=0;
-    do{
-        limpiar_pantalla();
-        cout<<"1. Agregar pelicula\n";
-        cout<<"2. Ofertar asientos\n";
-        cout<<"4. Generar reporte\n";
-        cout<<"4. Salir\n";
-        cout<<"Selecciones una: "; cin>>a;
-        switch (a) {
-        case 1:
-            agregar_pelicula();
-            break;
-        case 2:
-            ofertar_asientos();
-            break;
-        case 3:
-            generar_reporte();
-            break;
-        default:
-            break;
-        }
-    }while(a!=4);
-}
 
+}
 void agregar_pelicula(){
 
 }
-
 void ofertar_asientos(){
 
 }
-
 void generar_reporte(){
 
 }
 
 void user(){
     limpiar_pantalla();
-    int a=mostrar_funciones();
-    int b=seleccionar_asiento();
-    cout<<a<<endl;
+    int id=mostrar_funciones();
+    string sala=seleccionar_funcion(id);
+    seleccionar_asiento(sala);
 }
 
 int mostrar_funciones(){
@@ -133,20 +111,86 @@ int mostrar_funciones(){
         cout<<endl;
     }
     file.close();
-    cout<<"\nSEleccione una: "; cin>>op;
+    cout<<"Seleccionar: "; cin>>op;
     return op;
 }
 
-int seleccionar_asiento(){
+string seleccionar_funcion(int a){
+    string contenido, sala;
+    char *token;
+    int cont=1, col;
+    ifstream file("../parcial/cartelera.txt");
+    while(!file.eof()){
+        getline(file, contenido);
+        if(cont==a){
+            char cadena[100]="";
+            for(int i=0; i<int(contenido.size()); i++)
+                cadena[i]=contenido[i];
+            token=strtok(cadena, ",");
+            col=0;
+            while(token!=NULL){
+                token=strtok(NULL, ",");
+                col++;
+                if(token!=NULL)
+                    if(col==4){
+                        sala=token;
+                        return sala;
+                    }
+            }
+        }
+        cont++;
+    }
+    file.close();
+    return NULL;
+}
+
+void seleccionar_asiento(string sala){
     limpiar_pantalla();
-    int op;
     printf("%4s  ", "Tipo"); printf("%13s  ", "Clasificacion"); printf("%6s\n\n", "Costo");
     printf("%4s  ", "1"); printf("%13s  ", "General 2D"); printf("%6s\n", "7900$");
     printf("%4s  ", "2"); printf("%13s  ", "General 3D"); printf("%6s\n", "10800$");
     printf("%4s  ", "3"); printf("%13s  ", "VibroSound 2D"); printf("%6s\n", "9900$");
     printf("%4s  ", "4"); printf("%13s  ", "VibroSound 3D"); printf("%6s\n", "11900$");
-    cout<<"\nSeleccione una: "; cin>>op;
-    return op;
+    cout<<"<----------------------------"
+          "----------    /    ----------"
+          "---------------------------->\n\n";
+    int op=stoi(sala)-3;
+    switch(op){
+    case 1:
+        imprimir_sala(50);
+        break;
+    case 2:
+    case 3:
+    case 4:
+    case 7:
+        imprimir_sala(140);
+        break;
+    case 5:
+    case 6:
+        imprimir_sala(100);
+        break;
+    }
+
+    char fila, col;
+    cout<<"\nSelecciona fila: "; cin>>fila;
+    cout<<"Selecciona columna: "; cin>>col;
+
+    cin.ignore().get();
+}
+
+void imprimir_sala(int asientos){
+    int filas=asientos/10, col=10;
+    cout<<"  ";
+    for(int i=1; i<=col; i++)
+        printf("%2u ", i);
+    cout<<endl;
+    for(int i=1; i<=filas; i++){
+        printf("%1c ", char(i+64));
+        for(int j=1; j<=col; j++){
+            printf("%2c ", '-');
+        }
+        cout<<endl;
+    }
 }
 
 #endif // FUNCIONES_H
