@@ -14,6 +14,7 @@ class user
 public:
     user();
     void usuario();
+private:
     void limpiar_pantalla();
     int mostrar_funciones();
     string seleccionar_funcion(int a);
@@ -21,6 +22,7 @@ public:
     void imprimir_sala(string, map<char, int> &, int);
     void comprar(int, string, char, char, char, map<char, int> &);
     void reporte(map<char, int> &, char, char);
+    int contar_id();
     void asientos_disp(int);
 };
 

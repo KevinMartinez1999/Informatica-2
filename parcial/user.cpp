@@ -349,6 +349,23 @@ void user::reporte(map<char, int> &costos, char contenido, char gafas){
     file.close();
 }
 
+int user::contar_id()
+{
+    int cont=0;
+    string contenido;
+    ifstream file("../parcial/cartelera.txt");
+    if(file.is_open()){
+        getline(file, contenido);
+        cont++;
+        while(!file.eof()){
+            getline(file, contenido);
+            cont++;
+        }
+    }
+    file.close();
+    return cont;
+}
+
 //Se actualiza la cartelera con la cantidad de asientos que quedan disponibles
 void user::asientos_disp(int id){
 
@@ -363,7 +380,7 @@ void user::asientos_disp(int id){
     ifstream file("../parcial/cartelera.txt");
     while(!file.eof()){
         getline(file, contenido); //obtiene linea por linea el contenido del archivo
-
+        num++;
         //Solo en el caso de que cont corresponda al ID de la pelicula seleccionada se va a meter
         //a la condicion para realizar el cambio.
         //En caso de no cincidir el ID se le pasa al nuevo archivo tal cual, sin modificaciones.
@@ -388,9 +405,12 @@ void user::asientos_disp(int id){
         }
         else{
             //Se le pasa al nuevo archivo sin modificaciones.
-            arch<<contenido<<'\n';
+            if(num==contar_id()){
+                arch<<contenido;
+            }
+            else
+                arch<<contenido<<'\n';
         }
-        num++;
         cont++;
 
     }
@@ -400,7 +420,6 @@ void user::asientos_disp(int id){
     //Se crea un archivo nuevo.txt para guardar los cambios.
     //cartelera.txt solo sirve para leer y luego se borra para ser reeemplazada
     //por el nuevo archivo que contiene los cambios.
-
     remove("../parcial/cartelera.txt");
     rename("../parcial/nuevo.txt", "../parcial/cartelera.txt");
 }

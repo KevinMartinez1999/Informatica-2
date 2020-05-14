@@ -11,6 +11,7 @@ class admin
 public:
     admin();
     void administrador();
+private:
     void limpiar_pantalla();
     void agregar_pelicula();
     void ofertar_asientos();
