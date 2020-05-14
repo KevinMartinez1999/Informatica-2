@@ -60,7 +60,7 @@ void admin(){
     do{
         limpiar_pantalla();
         cout<<"1. Agregar pelicula\n";
-        cout<<"2. Generar registro\n";
+        cout<<"2. Generar reporte\n";
         cout<<"3. Salir\n";
         cout<<"\nSelecciones una: "; cin>>a;
         switch (a) {
@@ -139,6 +139,7 @@ void generar_reporte(){
     }
     else
         cout<<"No hay un reporte aun..."<<endl;
+    file.close();
     cin.ignore().get();
 }
 
@@ -278,7 +279,7 @@ void imprimir_sala(string sala, map<char, int> &costos){
     }
     else
         cout<<"No abierto..."<<endl;
-
+    file.close();
     char fila, col, gafas;
     cout<<"\n\nSelecciona fila: "; cin>>fila;
     fila=toupper(fila);
@@ -364,7 +365,7 @@ void reporte(map<char, int> &costos, char contenido, char gafas){
         else
             valor=costos['1'];
     }
-    ofstream file("../parcial/reporte.txt");
+    ofstream file("../parcial/reporte.txt", ios::app);
     file<<valor<<'\n';
     file.close();
 }
