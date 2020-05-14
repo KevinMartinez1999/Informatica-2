@@ -1,27 +1,18 @@
-#ifndef FUNCIONES_H
-#define FUNCIONES_H
+#include "user.h"
 
-#include <iostream> //Entrada y salida de datos
-#include <fstream> //Manejo de archivos
-#include <string.h> //Manejo de los string
-#include <map> //Contenedor mapa para trabajar los precios y los asientos
-#include <ctime> //Manejo del tiempo para hacer los reportes de ventas
+//En este interfaz se ejecuta todo el proceso de compra de una entrada,
+//seactualizan las bases de datos de asientos disponibles de cada sala y
+//el reporte de ventas.
+user::user()
+{
 
-using namespace std;
+}
 
-//Estas directivas a continuacion permiten ejercutar la limpieza de la pantalla
-//de forma que cuando se esta trabajando en windows se importa la libreria windows.h
-//donde se almacena la funcion de limpieza de consola.
-//En el caso de estar trabando con linux se ejecuta una funcion diferente que tambien
-//permite limpiar la consola.
-
-
-//Identifica en que sistema operativo se esta ejecutando el programa
 #ifdef _WIN32
     #include <windows.h>
 #endif
 
-void limpiar_pantalla(){
+void user::limpiar_pantalla(){
     #ifdef _WIN32
         system("cls");
     #else
@@ -30,156 +21,7 @@ void limpiar_pantalla(){
 
 }
 
-void admin();
-void agregar_pelicula();
-void ofertar_asientos();
-void generar_reporte();
-
-void user();
-int mostrar_funciones();
-string seleccionar_funcion(int a);
-void seleccionar_asiento(string, int);
-void imprimir_sala(string, map<char, int> &, int);
-void comprar(int, string, char, char, char, map<char, int> &);
-void reporte(map<char, int> &, char, char);
-void asientos_disp(int);
-
-//Menu principal donde se encuanta la opcion de acceder como administrador o como usuario corriente
-void menu(){
-    int a=0;
-    do{
-        limpiar_pantalla();
-        cout<<"1. Administrador\n";
-        cout<<"2. Usuario\n";
-        cout<<"3. Salir\n";
-        cout<<"\nSelecciones una: "; cin>>a;
-        switch (a) {
-        case 1:
-            admin();
-            break;
-        case 2:
-            user();
-            break;
-        default:
-            break;
-        }
-    }while(a!=3);
-}
-
-//Menu principal para el administrador.
-//Tiene las opciones de agregar una pelicula y mostar el reporte de ventas
-void admin(){
-    int a=0;
-    do{
-        limpiar_pantalla();
-        cout<<"1. Agregar pelicula\n";
-        cout<<"2. Generar reporte\n";
-        cout<<"3. Salir\n";
-        cout<<"\nSelecciones una: "; cin>>a;
-        switch (a) {
-        case 1:
-            agregar_pelicula();
-            break;
-        case 2:
-            generar_reporte();
-            break;
-        default:
-            break;
-        }
-    }while(a!=3);
-}
-
-void agregar_pelicula(){
-    limpiar_pantalla();
-    char nombre[20], genero[10], duracion[10], hora[5], clas[5];
-    int id, sala, asientos;
-    cin.ignore();
-    //cin.ignore() se usa para limpiar el ultimo salto de linea en el buffer
-    //y no generar errores a la hota de ingresar datos por consola
-    cout<<"Nombre: "; cin.getline(nombre, 20); //Se usa cin.getline() para obtener cadenas de caracteres con espacios
-    cout<<"Genero: "; cin.getline(genero, 10);
-    cout<<"Duracion: "; cin.getline(duracion, 10);
-    cout<<"Sala: "; cin>>sala; cin.ignore(); //Se debe usar cin.ignore() de nuevo ya que
-                                             //se uso el cin y queda almacenado un salto de linea en el buffer.
-    cout<<"Hora: "; cin.getline(hora, 5);
-    cout<<"Clasif: "; cin.getline(clas, 5);
-
-    //El cine tiene ya sus salas contruidas asi que cuando se le ingresa una sala
-    //al momento de agregar una pelicula ya se sabe cuantos asientos tiene la respectiva sala.
-    //Esto se hace con un switch-case que verifica que valor tiene la variable sala.
-
-    switch (sala) {
-    case 1:
-        asientos=50;
-        break;
-    case 2:
-    case 3:
-    case 4:
-    case 7:
-        asientos=140;
-        break;
-    case 5:
-    case 6:
-        asientos=100;
-        break;
-    default:
-        asientos=80;
-        break;
-
-    }
-
-    //Aqui se cuentan cuantas peluclas hay registradas para asignarle un ID a la nueva pelicula
-    ifstream file("../parcial/cartelera.txt");
-    char s[100];
-    int cont=0;
-    if(file.is_open()){ //Verifica que el archivo esta bierto correctamente
-        while(!file.eof()){ //Itera hasta el final del archivo
-            file.getline(s, 100); //Obtiene una linea completa del archivo
-            cont++; //Por cada linea suma uno al contador que va a servir como referencia para dar un nuevo ID
-        }
-    }
-    else
-        cout<<"Error"<<endl; //Errorr en caso de no poder abrir el archivo
-    file.close();
-    id=cont+1; //Se le suma 1 ya que por ejemplo si hay 3 peliculas del ID de la nueva debe ser 4.
-
-    ofstream arch("../parcial/cartelera.txt", ios::app); //Se abre como escritura al final del archivo
-    if(arch.is_open()){
-        //Aqui se agrega toda la informacion en una nueva linea del archivo seprado por comas (',')
-
-        arch<<'\n';
-        arch<<id<<','<<nombre<<','<<genero<<','<<duracion<<','<<sala<<','<<hora<<','<<asientos<<','<<clas<<',';
-    }
-    else
-        cout<<"Error"<<endl;
-    arch.close();
-}
-
-//Genera el reporte de las ventas que se han tenido con su fecha y hora en que se hizo la compra.
-void generar_reporte(){
-    limpiar_pantalla();
-    cout<<"<-----REPORTE DE ENTRADAS DE CINE----->\n\n";
-    ifstream file("../parcial/reporte.txt"); //Abre el archivo en lectura
-    char contenido[100];
-    if(file.is_open()){
-        // Se saca la informacion del archivo con el bucle while y se imprime en pantalla
-        file.getline(contenido, 100);
-        while(!file.eof()){
-            cout<<contenido<<endl;
-            file.getline(contenido, 100);
-        }
-    }
-    else
-        //En caso de no abrir el archivo es porque no hay un reporte aun, esto se notifica por consola
-        cout<<"No hay un reporte aun..."<<endl;
-    file.close();
-    cin.ignore().get(); //Se pausa la consola hasta ingresar un salto de linea
-}
-
-//En este interfaz se ejecuta todo el proceso de compra de una entrada,
-//seactualizan las bases de datos de asientos disponibles de cada sala y
-//el reporte de ventas.
-void user(){
+void user::usuario(){
     limpiar_pantalla();
     int id=mostrar_funciones();
     string sala=seleccionar_funcion(id);
@@ -187,7 +29,7 @@ void user(){
 }
 
 //Muestra las funciones que hay en el momento, su nombre, sala, asientos disponibles, etc.
-int mostrar_funciones(){
+int user::mostrar_funciones(){
     // 'cont' controla cuando el token esta parado en el nombre
     // 'op' es la opcion quue toma el usuario de que pelicula quiere ver
     // 'num' es el numero de peliculas que hay disponibles, op no puede ser mayor que num para garantizar existencia de las peliculas
@@ -251,7 +93,7 @@ int mostrar_funciones(){
 
 // La funcion anterior retorna un ID, ese mismo ID se le pasa a esta funcion y busca
 // la sala correspondiente de es ID
-string seleccionar_funcion(int a){
+string user::seleccionar_funcion(int a){
     string contenido, sala;
     char *token;
     int cont=1, col;
@@ -290,7 +132,7 @@ string seleccionar_funcion(int a){
     return NULL;
 }
 
-void seleccionar_asiento(string sala, int id){
+void user::seleccionar_asiento(string sala, int id){
     limpiar_pantalla();
 
     //Aqui se imprime la tabla de valores de cada uno de los asientos
@@ -338,7 +180,7 @@ void seleccionar_asiento(string sala, int id){
 }
 
 //Se encarga de imprimir la sala requerida.
-void imprimir_sala(string sala, map<char, int> &costos, int id){
+void user::imprimir_sala(string sala, map<char, int> &costos, int id){
     char letra=65; //Hace referencia a la A
     cout<<"  ";
     for(int i=1; i<=10; i++) //imprime las 10 columnas numeradas del 1-10
@@ -388,7 +230,7 @@ void imprimir_sala(string sala, map<char, int> &costos, int id){
     comprar(id, sala, fila, col, gafas, costos); //Luego de todo el proceso de seleccion, se procede a hacer la compra
 }
 
-void comprar(int id, string sala, char fila, char col, char gafas, map<char, int> &costos){
+void user::comprar(int id, string sala, char fila, char col, char gafas, map<char, int> &costos){
     map<char, int> mapa1; //controla las filas de las salas
     map<char, int> mapa2; //Controla las columnas de las salas
     int pos;
@@ -481,7 +323,7 @@ void comprar(int id, string sala, char fila, char col, char gafas, map<char, int
     rename("../parcial/salas/nuevo.txt", sala.c_str());
 }
 
-void reporte(map<char, int> &costos, char contenido, char gafas){
+void user::reporte(map<char, int> &costos, char contenido, char gafas){
     time_t fecha_hora=time(NULL); //time_t obtiene la fecha y hora del sistema en segundos
     char *time=ctime(&fecha_hora); //Obtiene la fecha y hora actual en forma de string
     int valor=0;
@@ -508,14 +350,14 @@ void reporte(map<char, int> &costos, char contenido, char gafas){
 }
 
 //Se actualiza la cartelera con la cantidad de asientos que quedan disponibles
-void asientos_disp(int id){
+void user::asientos_disp(int id){
 
     //En esta funcion nuevamente se hace uso del token para
     //lograr obtener los datos separados por una coma (',')
 
     string contenido;
     char *token;
-    int cont=1;
+    int cont=1, num=0;
 
     ofstream arch("../parcial/nuevo.txt");
     ifstream file("../parcial/cartelera.txt");
@@ -544,9 +386,11 @@ void asientos_disp(int id){
             }
             arch<<'\n';
         }
-        else
+        else{
             //Se le pasa al nuevo archivo sin modificaciones.
             arch<<contenido<<'\n';
+        }
+        num++;
         cont++;
 
     }
@@ -560,5 +404,3 @@ void asientos_disp(int id){
     remove("../parcial/cartelera.txt");
     rename("../parcial/nuevo.txt", "../parcial/cartelera.txt");
 }
-
-#endif // FUNCIONES_H

@@ -4,7 +4,10 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp
+        admin.cpp \
+        main.cpp \
+        user.cpp
 
 HEADERS += \
-    funciones.h
+    admin.h \
+    user.h
