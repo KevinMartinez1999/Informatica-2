@@ -60,31 +60,71 @@ void admin(){
     do{
         limpiar_pantalla();
         cout<<"1. Agregar pelicula\n";
-        cout<<"2. Mostrar asientos disp.\n";
-        cout<<"3. Generar registro\n";
+        cout<<"2. Generar registro\n";
+        cout<<"3. Salir\n";
         cout<<"\nSelecciones una: "; cin>>a;
         switch (a) {
         case 1:
             agregar_pelicula();
             break;
         case 2:
-            ofertar_asientos();
-            break;
-        case 3:
             generar_reporte();
             break;
         default:
             break;
         }
-    }while(a!=4);
+    }while(a!=3);
 }
 
 void agregar_pelicula(){
-
+    limpiar_pantalla();
+    char nombre[20], genero[10], duracion[10], hora[5], clas[5];
+    int id, sala, asientos;
+    cin.ignore();
+    cout<<"Nombre: "; cin.getline(nombre, 20);
+    cout<<"Genero: "; cin.getline(genero, 10);
+    cout<<"Duracion: "; cin.getline(duracion, 10);
+    cout<<"Sala: "; cin>>sala; cin.ignore();
+    cout<<"Hora: "; cin.getline(hora, 5);
+    cout<<"Clasif: "; cin.getline(clas, 5);
+    switch (sala) {
+        case 1:
+            asientos=50;
+            break;
+        case 2:
+        case 3:
+        case 4:
+        case 7:
+            asientos=140;
+            break;
+        case 5:
+        case 6:
+            asientos=100;
+            break;
+    }
+    ifstream file("../parcial/cartelera.txt");
+    char s[100];
+    int cont=0;
+    if(file.is_open()){
+        while(!file.eof()){
+            file.getline(s, 100);
+            cont++;
+        }
+    }
+    else
+        cout<<"Error"<<endl;
+    file.close();
+    id=cont+1;
+    ofstream arch("../parcial/cartelera.txt", ios::app);
+    if(arch.is_open()){
+        arch<<'\n';
+        arch<<id<<','<<nombre<<','<<genero<<','<<duracion<<','<<sala<<','<<hora<<','<<asientos<<','<<clas<<',';
+    }
+    else
+        cout<<"Error"<<endl;
+    arch.close();
 }
-void ofertar_asientos(){
 
-}
 void generar_reporte(){
     limpiar_pantalla();
     cout<<"<-----REPORTE DE ENTRADAS DE CINE----->\n\n";

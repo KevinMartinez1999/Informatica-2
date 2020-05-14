@@ -1,3 +1,5 @@
 1,El aro,terror,120,4,7,100,18+,
 2,Bob esponja,infantil,100,5,7,100,6+,
 3,El aro 2,terror,140,6,7,120,18+,
+4,Rapido y furioso,accion,120,3,5,140,16+,
+5,El exorcismo,terror,100,2,9,140,18+,
