@@ -1,5 +1,14 @@
 #include "user.h"
 
+/*
+ Interfaz del usuario.
+
+ Se compone de las siguientes partes:
+
+ * Una ventana donde se muestran las peliculas en cartelera
+ * Una ventana donde se muestran los precios y los asientos disponibles
+ */
+
 //En este interfaz se ejecuta todo el proceso de compra de una entrada,
 //seactualizan las bases de datos de asientos disponibles de cada sala y
 //el reporte de ventas.

@@ -1,5 +1,13 @@
 #include "admin.h"
 
+/*
+ Interfaz del administrador.
+
+ Se compone de las siguientes partes:
+
+ * Agregar peliculas
+ * Mostrar reporte de ventas
+ */
 
 //Menu principal para el administrador.
 //Tiene las opciones de agregar una pelicula y mostar el reporte de ventas
@@ -21,9 +29,29 @@ void admin::limpiar_pantalla(){
 
 }
 
+bool admin::verificar()
+{
+    string clave, sudo;
+    ifstream file("../parcial/sudo.txt");
+    if(file.is_open()){
+        file>>sudo;
+        cout<<"Ingrese clave de administrador: "; cin>>clave;
+        if(sudo==clave)
+            return true;
+        else
+            return false;
+    }
+    else{
+        cout<<"Error, no existe una clave de administrador.\n";
+        cin.ignore().get();
+        return false;
+    }
+}
+
 void admin::administrador(){
     int a=0;
-    do{
+    limpiar_pantalla();
+    if(verificar()){
         limpiar_pantalla();
         cout<<"1. Agregar pelicula\n";
         cout<<"2. Generar reporte\n";
@@ -39,7 +67,12 @@ void admin::administrador(){
         default:
             break;
         }
-    }while(a!=3);
+    }
+    else{
+        cout<<"Acceso denegado."<<endl;
+        cin.ignore().get();
+        return;
+    }
 }
 
 void admin::agregar_pelicula(){

@@ -13,6 +13,7 @@ public:
     void administrador();
 private:
     void limpiar_pantalla();
+    bool verificar();
     void agregar_pelicula();
     void ofertar_asientos();
     void generar_reporte();
