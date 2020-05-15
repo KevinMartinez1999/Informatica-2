@@ -127,7 +127,7 @@ void admin::agregar_pelicula(){
     else
         cout<<"Error"<<endl; //Errorr en caso de no poder abrir el archivo
     file.close();
-    id=cont; //Se le suma 1 ya que por ejemplo si hay 3 peliculas del ID de la nueva debe ser 4.
+    id=cont+1; //Se le suma 1 ya que por ejemplo si hay 3 peliculas del ID de la nueva debe ser 4.
     ofstream arch("../parcial/cartelera.txt", ios::app); //Se abre como escritura al final del archivo
     if(arch.is_open()){
         //Aqui se agrega toda la informacion en una nueva linea del archivo seprado por comas (',')
