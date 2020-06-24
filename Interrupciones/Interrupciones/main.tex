@@ -1,0 +1,90 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{palatino}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{titling} % drop vertical space before the title
+\usepackage{multirow}
+\usepackage{lscape}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{subcaption}
+\usepackage[a4paper, total={6in, 9.5in}]{geometry}
+\fontfamily{ppl}\selectfont 
+
+\usepackage[american]{babel}
+
+\onehalfspacing
+%% ===============================================
+
+\setlength{\droptitle}{-5em} %% Don't touch
+
+\title{Interrupciones a nivel de microprocesadores
+\thanks{Documento seleccionado preparado para su presentación en el curso Informática II en el mes de julio del 2020.}
+}
+
+\author{Kevin David Martinez Zapata\\% Name author
+    \href{mailto:kevin.martinez1@udea.edu.co}{\texttt{kevin.martinez1@udea.edu.co}}
+    }
+    
+\date{Julio 3, 2020}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\renewcommand{\baselinestretch}{1.4} 
+
+\begin{document}
+
+\maketitle
+
+\begin{quote}
+"La ciencia no es sino una perversión de sí misma, a menos que tenga como objetivo final el mejoramiento de la humanidad".
+-Nikola Tesla
+\end{quote}
+
+\begin{abstract}
+Las interrupciones son señales que permiten detener un proceso cuando otro mas importante debe realizarse, esto nació por la necesidad de sondear los dispositivos periférico del microcontrolador de forma automática y saltara una alarma en caso de algún error; De allí se derivan tres tipos de interrupciones: por hardware que son asíncronas y depende mucho el tipo de controlador que se usa, por software que son síncronas y las excepciones que se usan mucho en algunos lenguajes de programación.
+\end{abstract}
+
+\section{Introducción}
+Los microcontroladores se programan para seguir con una serie de instrucciones que el programador quiere que realice, las tareas por lo general se realizan de forma cíclica (una orden tras otra); Estos programas son llamados programas principales como por ejemplo la función main( ) en un programa escrito en C/C++ o el setup( ) en un programa de Arduino.
+
+Cuando se habla de interrupciones se refiere a un evento que detiene este programa principal para realizar una actividad de mayor importancia o urgencia; Cabe destacar que mientras no se haga una interrupción el programa va a seguir con su rutina habitual. Las interrupciones están ahí en nuestra vida cotidiana sin nosotros darnos cuenta, por ejemplo, un sensor de humo, la advertencia de batería baja de celular, la alarma del microondas cuando acaba el tiempo (que se genera por un desbordamiento del timer), etcétera. A continuación, se va a mostrar más detalladamente que son las interrupciones, su origen, como se implementan y ejemplos más detallados.
+\cite{interrupciones2}
+
+\section{La necesidad de las interrupciones}
+El primer microprocesador de la historia fue el intel 4004 lanzado el 15 de noviembre de 1971 por la compañía Chips Intel y tenía 16 pines, 4 bits de memoria y con una frecuencia de reloj de 740 kHz. Cuando nace el microprocesador nacen las interrupciones debido a la necesidad del programador de controlar eventos sin este intervenir mientras se ejecuta el programa. La primera técnica que se uso fue el polling o sondeo que consiste en que el microprocesador verifique constantemente los dispositivos periféricos de cada cierto intervalo de tiempo para corroborar si estos tenían alguna comunicación pendiente; Esta técnica fue muy poco eficiente ya que constantemente se consumían los recursos de la maquina verificando.
+\cite{polling}
+
+Las interrupciones nacen como la necesidad de resolver este problema de eficiencia; La solución fue darle al dispositivo periférico la tarea de avisar o comunicarse cuando fuera necesario y así el microprocesador no tendría que verificar cada cierto intervalo de tiempo, sino que se queda a la espera de recibir un aviso (orden de interrumpir) para detener el proceso actual y así realizar otro de mayor prioridad.
+\cite{interrupciones}
+
+\section{Tipos de interrupciones}
+Las interrupciones pueden clasificarse de tres formas, interrupciones de hardware, interrupciones de software y excepciones:
+
+\subsection{Interrupciones de hardware}
+Una señal síncrona es aquella depende del reloj, o sea que esta solo se activa cuando existe un flanco de subida o bajada dependiendo de cómo este programado. Las interrupciones de hardware son interrupciones asíncronas ya que estas no dependen del reloj y se pueden generar en cualquier momento sin importar los que esté haciendo la CPU en ese momento; Estas son independientes del procesador (no hay ninguna instrucción definida en el programa), más bien sestan ligadas a los dispositivos I/O (entrada y salida).
+
+\subsection{Interrupciones por software}
+Estas también denominadas llamadas del sistema al contrario de las interrupciones de hardware si se producen de forma síncrona con el reloj, debido a esto se podrían predecir sabiendo lo que se está ejecutando; Por ejemplo, la CPU debe leer un archivo de texto para recoger un dato, el programa se detiene y va a por ese dato requerido, en ese momento llama al sistema e interrumpe virtualmente hasta recibir una respuesta, si no hay respuesta el programa no se reanuda a sus tareas habituales.
+\cite{interrupciones3}
+
+\subsection{Excepciones}
+Las excepciones son un tipo de interrupciones síncronas igual que las interrupciones por software, solo que estas se centran en encontrar errores en la ejecución del proceso tales como una división por cero, acceso denegado o un archivo que no existe o esta erróneo. Estas interrupciones detienen el programa para que el error sea atendido y así garantizar la integridad de los datos. Estas interrupciones son especiales porque cuando hay una el sistema intenta solucionar el problema y de no poder solucionarlo se aborta el proceso.
+
+\section{Mecanismo de interrupciones}
+En todos los lenguajes de programación en posible hacer interrupciones ya sea para detectar una división por cero, la lectura de un archivo para extraer un dato, etcétera. Esto hace parte de lo que serían interrupciones por software; A nivel de hardware las interrupciones ya vienen limitadas, controladores como el 8259 de Intel contiene 16 pines numerados de 00 a 15, otras placas más modernas poseen hasta unas 24 interrupciones (pines); otras aún más limitadas que la 8259 que contenía apenas 8 interrupciones; El hardware que se esté utilizando influye mucho en el número de interrupciones simultaneas que se pueden hacer.
+
+\section{Conclusión}
+A modo de facilitar la manera de trabajar de los programadores nacen las interrupciones que lograron que el programador no tuviera que hacer un sondeo manualmente de los procesos, esto llevo a generar sistemas que se pudieran gestionar solos y en caso de encontrar un error fuera capaz de avisar y detener los procesos habituales con el fin de preservar los datos, además también de la posibilidad de reparar dichos errores si las interrupciones con síncronas ya que permiten ser predichas por el programador.
+
+Hoy podemos ver un sinfín de mecanismos que usan interrupciones (prácticamente casi todos los sistemas electrónicos); Actualizar el reloj de la computadora, una alarma de incendios, verificación de dispositivos, una alarma… Todos estos son interrupciones que si nos detenemos a observar estamos rodeados de ellas.
+\cite{estructura}
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
