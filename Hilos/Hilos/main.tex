@@ -1,0 +1,98 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{palatino}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{titling} % drop vertical space before the title
+\usepackage{multirow}
+\usepackage{lscape}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{subcaption}
+\usepackage[a4paper, total={6in, 9.5in}]{geometry}
+\fontfamily{ppl}\selectfont 
+
+\usepackage[american]{babel}
+
+\onehalfspacing
+%% ===============================================
+
+\setlength{\droptitle}{-5em} %% Don't touch
+
+\title{Hilos a nivel de microprocesadores
+\thanks{Documento seleccionado preparado para su presentación en el curso Informática II en el mes de julio del 2020.}
+}
+
+\author{Kevin David Martinez Zapata\\% Name author
+    \href{mailto:kevin.martinez1@udea.edu.co}{\texttt{kevin.martinez1@udea.edu.co}}
+    }
+    
+\date{Julio 17, 2020}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\renewcommand{\baselinestretch}{1.3} 
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Los hilos son la herramienta para lograr ejecutar dos o más programas a la vez sin afectar su resultado final. Podemos ver algo parecido a los hilos en nuestro teléfono móvil cuando estamos usando una aplicación de reproducción de música y cambiamos a otra a responder un mensaje de texto, aquí se están ejecutando dos tareas en paralelo y podemos ver cada aplicación como un hilo. Los hilos vienen en tres tipos y cada uno posee sus ventajas y desventajas tanto para la maquina misma como para quien los diseña. Así pues, son algo fundamental a la hora de diseñar un sistema operativo o un programa para el usuario.
+\end{abstract}
+
+\section{Introducción}
+Un hilo o thread es una unidad básica de utilización de CPU y son las instrucciones más pequeñas que el sistema operativo manda al procesador; Es una característica de un programa que permite ejecutar múltiples tareas por separado y le da mayor flexibilidad para ejecutarlas al mismo tiempo. Usar multitareas permite al usuario cambiar entre programas y moverse libremente ya que no dependen del reloj y esto genera una mejora notable en el rendimiento. Un hilo, en ultimo termino, es una tarea que puede ser ejecutada al mismo tiempo que otra y posee varios estados de ejecución.
+\cite{Hilos1}
+
+\section{Estados de los hilos}
+
+\begin{itemize}
+\item \textbf{Ejecutándose:} El hilo se ejecuta con normalidad.
+
+\item \textbf{Suspendido:} Equivale a estar detenido temporalmente hasta ser reanudado nuevamente.
+
+\item \textbf{Reanudando:} El hilo se prepara para ponerse en ejecución nuevamente.
+
+\item \textbf{Bloqueado:} Cuando espera un recurso.
+
+\item \textbf{Detenido:} Se finaliza inmediatamente y no se puede reanudar.
+
+\end{itemize}
+
+\section{¿Como nacen los hilos?}
+La idea de los hilos nacen en la década de 1960 por la necesidad de mejorar el rendimiento a la hora de ejecutar código y llevar a cabo funcionalidades en los sistemas operativos ya que en sus inicios los procesadores no estaban usando su máximo potencial y se necesitaba una unidad de procesamiento ms manejable o dinámica para moverse entre programas, ya que se dio a conocer que es mucho más eficiente moverse entre distintos programas que ejecutan ciertas tareas que un solo programa que ejecuta todas las tareas.
+\cite{Hilos2}
+
+\section{Tipos de hilos}
+Hay dos formas en las cuales se implementan los hilos: hilos a nivel del usuario e hilos a nivel del kernel o núcleo; Se conocen como ULT y KLT respectivamente.
+
+\subsection{Hilos a nivel del usuario}
+Son implementados en alguna librería y se gestionan si el soporte del sistema operativo. A estos hilos los gestiona una aplicación y el kernel no es consciente de la existencia de estos. Para verlo de una forma más simple, se llevan a cabo unas instrucciones en el espacio del usuario y el núcleo continúa planificando el proceso como si fuera uno solo y no varios y dándolo un único estado ya sea listo o bloqueado.
+
+\subsection{Hilos a nivel de Kernel o núcleo}
+Aquí a diferencia de los hilos de usuario, el sistema operativo crea, planifica y gestiona todos los hilos y reconoce cuantos hilos sean; Estos hilos tienen como beneficio aprovechar al máximo la estructura del procesador que se esté usando y logra proporcionar un mejor tiempo de respuesta que por lo general eso es lo que se busca, velocidad de ejecución ya que si un hilo se bloquea los otros pueden seguir funcionando no como en los hilos de usuario que si un hilo se bloquea, todos se bloquean porque el kernel asumió esos hilos como uno solo.
+
+\subsection{Combinaciones ULT y KLT}
+La creación y planificación de los hilos se da en el espacio del usuario, los múltiples ULT se asocian con varios KLT lo que se llama un modelo Many to many (Muchos a muchos), es un método combinado y los hilos se pueden ejecutar en paralelo en múltiples procesadores y los bloqueos no necesitan bloquear todos los procesos porque es consciente de cuantos procesos están en ejecución lo que elimina el problema que tenía solo ejecutar hilos de usuario ya que aquí si se bloquean todos los procesos.
+\cite{usuario_kernel}
+
+\section{Hilos en un procesador}
+Los hilos en el microprocesador se pueden definir como el flujo de control de programas; Ayudan de forma directa a la forma en que el procesador administra las tareas o sea que hace que los tiempos de espera entre procesos sean mejor aprovechados. Un núcleo solo puede ejecutar una tarea a la vez, pero se pueden usar hilos para dar la sensación de que se están ejecutando varias tareas al tiempo alternando entre porciones de tareas, es decir, se hace un poco de un proceso y otro poco de otro proceso y cada uno de esos trozos de código corresponde a un hilo y de esa forma no se tiene que esperar que un proceso acabe para empezar otro. Los hyperthread o multi-hilos es una tecnología que hace creer al ordenador por medio de software que tiene el doble de núcleos de los que realmente hay, si los procesos se ejecutan de forma simultánea y así accederán a los recursos de forma compartida, entonces las tareas se ejecutarán con un menor consumo de recursos
+\cite{hardware}
+
+\section{Hilos de software}
+Cuando los hilos se administran en el espacio de usuario cada proceso tiene una tabla de hilos en donde se lleva la cuenta de los hilos que se están ejecutando. La programación concurrente envuelve muchos lenguajes de programación y algoritmos, también trae con si muchos términos como son el paralelismo, concurrencia, procesos, hilos, etcétera; Los hilos son necesarios ya que todo programa necesita al menos un hilo para ser ejecutado (Hilo principal del programa). Cada hilo tiene su propia ID, contador, registros, una memoria designada para el stack. Algunos lenguajes de programación tienen características de diseño de hilos para facilitar a los programadores usarlos como son Java y Delphi, pero la mayoría de los lenguajes usan bibliotecas especiales del propio sistema operativo para usar los hilos como son C/C++.
+\cite{software}
+
+\section{Conclusión}
+Los hilos son una herramienta que se creó con el fin de dividir problemas en subproblemas para que se solucionen de forma individual y así se crea un programa que no se ve afectado en tiempo real; Este método de programación permitió sacar el máximo provecho de los procesadores y por ende mejorar el rendimiento en cuanto a tiempo de ejecución. Un programa se divide en dos hilos y ejecuta una parte del código y luego migra al otro hilo y ejecuta otra fracción de código lo que da la sensación de que se ejecutan a la vez y así completar dos procesos distintos a la vez.
+
+
+\bibliographystyle{plain}
+\bibliography{Referencias}
+\end{document}
