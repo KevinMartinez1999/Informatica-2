@@ -31,12 +31,14 @@ Widget::Widget(QWidget *parent)
 
     //line delimiter.
     top     = new QGraphicsLineItem(x,y,width,y);
-    bottom  = new QGraphicsLineItem(0,550,800,550);
+    bottom  = new QGraphicsLineItem(0,565,800,565);
+    bottom2  = new QGraphicsLineItem(0,570,800,570);
     left    = new QGraphicsLineItem(x,y,x,height);
     rigth   = new QGraphicsLineItem(width,y,width,height);
 
     scene->addItem(top);
     scene->addItem(bottom);
+    scene->addItem(bottom2);
     scene->addItem(left);
     scene->addItem(rigth);
 
@@ -60,7 +62,7 @@ Widget::Widget(QWidget *parent)
 
     QTimer * timer = new QTimer;
     connect(timer, &QTimer::timeout, this, &Widget::move);
-    timer->start(30);
+    timer->start(20);
 }
 
 Widget::~Widget()
@@ -82,9 +84,8 @@ void Widget::move()
 {
     for (int i = 0; i < objetos.length(); i++)
     {
-        if (objetos[i]->collidesWithItem(bottom))
+        if (objetos[i]->collidesWithItem(bottom) or objetos[i]->collidesWithItem(bottom2))
         {
-            qDebug()<<"Colision";
             objetos[i]->colision();
         }
 

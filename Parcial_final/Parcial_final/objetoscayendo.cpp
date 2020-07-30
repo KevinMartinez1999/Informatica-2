@@ -7,20 +7,27 @@ ObjetosCayendo::ObjetosCayendo(QObject *parent, double x, double y, double vy, d
 {
     T = 0;
 
-    setRect(0,0,20,20);
+    flag = true;
+
+    setRect(0,0,30,30);
     setBrush(QBrush(Qt::green));
     setPos(X,Y);
 }
 
 void ObjetosCayendo::move()
 {
-    T += 0.01;
-    VY += AY*T;
-    Y += VY*T + (0.5)*AY*pow(T,2);
+    if (flag)
+    {
+        T += 0.01;
+        VY += AY*T;
+        Y += VY*T + (0.5)*AY*pow(T,2);
+    }
     setY(Y);
 }
 
 void ObjetosCayendo::colision()
 {
     VY = -VY*e;
+    if (abs(VY) < 3)
+        flag = false;
 }

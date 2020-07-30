@@ -20,10 +20,14 @@ public:
     void move();
     void colision();
 
+    inline void setVY(int v) {VY = v;}
+    inline void setAY(int a) {AY = a;}
+
 signals:
 
 private:
     double X,Y,VY,AY,T;
+    bool flag;
 
 };
 

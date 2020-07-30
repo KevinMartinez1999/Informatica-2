@@ -5,8 +5,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsLineItem>
 #include <QRect>
-#include<QDesktopWidget>
+#include <QDesktopWidget>
 #include <ctime>
+#include <math.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -28,7 +29,7 @@ private slots:
 private:
     Ui::Widget *ui;
     QGraphicsScene * scene;
-    QGraphicsLineItem *bottom, *top, *left, *rigth;
+    QGraphicsLineItem *bottom, *bottom2, *top, *left, *rigth;
     float x;
     float y;
     float width;

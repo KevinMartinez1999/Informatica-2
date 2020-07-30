@@ -21,10 +21,9 @@ Orbitas::Orbitas(QObject *parent, double x, double y, double vx, double vy, doub
               QBrush(Qt::cyan), QBrush(Qt::magenta),
               QBrush(Qt::gray)};
 
-    setRect(0,0,20,20);
+    setRect(0,0,30,30);
     setBrush(colors[color]);
     setPos(X,Y);
-
 
     QTimer * timer = new QTimer;
     connect(timer, &QTimer::timeout, this, &Orbitas::move);
@@ -32,7 +31,7 @@ Orbitas::Orbitas(QObject *parent, double x, double y, double vx, double vy, doub
 
     QTimer * colision = new QTimer;
     connect(colision, &QTimer::timeout, this, &Orbitas::colision);
-    colision->start(200);
+    colision->start(100);
 }
 
 void Orbitas::move()
