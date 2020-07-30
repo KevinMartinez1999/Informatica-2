@@ -6,6 +6,7 @@
 #include <QDebug>
 
 QList<Orbitas *> planetas;
+QList<ObjetosCayendo *> objetos;
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -20,6 +21,24 @@ Widget::Widget(QWidget *parent)
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setScene(scene);
+
+    //Screen lenght.
+    QRect lenScreen = QApplication::desktop()->screenGeometry();
+    x=lenScreen.x();
+    y=lenScreen.y();
+    width=lenScreen.width();
+    height=lenScreen.height();
+
+    //line delimiter.
+    top     = new QGraphicsLineItem(x,y,width,y);
+    bottom  = new QGraphicsLineItem(0,550,800,550);
+    left    = new QGraphicsLineItem(x,y,x,height);
+    rigth   = new QGraphicsLineItem(width,y,width,height);
+
+    scene->addItem(top);
+    scene->addItem(bottom);
+    scene->addItem(left);
+    scene->addItem(rigth);
 
     Orbitas * planeta1 = new Orbitas(this, 0, 0, 0, 0, 50000);
     Orbitas * planeta2 = new Orbitas(this, -5000, 0, 0, -2, 70);
@@ -40,8 +59,8 @@ Widget::Widget(QWidget *parent)
     scene->addItem(planeta5);
 
     QTimer * timer = new QTimer;
-    connect(timer, &QTimer::timeout, this, &Widget::generarObjetos);
-    timer->start(2000);
+    connect(timer, &QTimer::timeout, this, &Widget::move);
+    timer->start(30);
 }
 
 Widget::~Widget()
@@ -49,12 +68,26 @@ Widget::~Widget()
     delete ui;
 }
 
-void Widget::generarObjetos()
+
+void Widget::on_pushButton_clicked()
 {
-    int Aaleatoria = 1 + (rand() % 20);
-    qDebug()<<Aaleatoria;
+    int Aaleatoria = 1 + (rand() % 3);
     int Xaleatoria = 1 + (rand() % 780);
-    ObjetosCayendo * obj = new ObjetosCayendo(this, Xaleatoria, 0, 3, Aaleatoria);
+    ObjetosCayendo * obj = new ObjetosCayendo(this, Xaleatoria, 0, 0, Aaleatoria);
     scene->addItem(obj);
+    objetos.append(obj);
 }
 
+void Widget::move()
+{
+    for (int i = 0; i < objetos.length(); i++)
+    {
+        if (objetos[i]->collidesWithItem(bottom))
+        {
+            qDebug()<<"Colision";
+            objetos[i]->colision();
+        }
+
+        objetos[i]->move();
+    }
+}

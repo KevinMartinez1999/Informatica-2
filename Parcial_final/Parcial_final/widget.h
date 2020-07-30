@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include <QGraphicsScene>
+#include <QGraphicsLineItem>
+#include <QRect>
+#include<QDesktopWidget>
 #include <ctime>
 
 QT_BEGIN_NAMESPACE
@@ -17,11 +20,18 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
-public slots:
-    void generarObjetos();
+private slots:
+    void on_pushButton_clicked();
+
+    void move();
 
 private:
     Ui::Widget *ui;
     QGraphicsScene * scene;
+    QGraphicsLineItem *bottom, *top, *left, *rigth;
+    float x;
+    float y;
+    float width;
+    float height;
 };
 #endif // WIDGET_H

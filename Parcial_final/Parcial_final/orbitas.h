@@ -8,6 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <ctime>
+
+using namespace std;
 
 class Orbitas : public QObject, public QGraphicsEllipseItem
 {
@@ -26,9 +29,11 @@ public:
 
 public slots:
     void move();
+    void colision();
 
 private:
     double X,Y,VX,VY,MASA;
+    QList<QBrush> colors;
 
 signals:
 

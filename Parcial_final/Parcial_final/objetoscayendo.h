@@ -17,8 +17,8 @@ public:
                             double x = 0, double y = 0,
                             double vy = 0, double ay = 0);
 
-public slots:
     void move();
+    void colision();
 
 signals:
 

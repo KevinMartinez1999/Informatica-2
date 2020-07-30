@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -22,6 +23,7 @@ class Ui_Widget
 public:
     QGridLayout *gridLayout;
     QGraphicsView *graphicsView;
+    QPushButton *pushButton;
 
     void setupUi(QWidget *Widget)
     {
@@ -33,7 +35,12 @@ public:
         graphicsView = new QGraphicsView(Widget);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
 
-        gridLayout->addWidget(graphicsView, 0, 0, 1, 1);
+        gridLayout->addWidget(graphicsView, 1, 0, 1, 1);
+
+        pushButton = new QPushButton(Widget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        gridLayout->addWidget(pushButton, 0, 0, 1, 1);
 
 
         retranslateUi(Widget);
@@ -44,6 +51,7 @@ public:
     void retranslateUi(QWidget *Widget)
     {
         Widget->setWindowTitle(QCoreApplication::translate("Widget", "Widget", nullptr));
+        pushButton->setText(QCoreApplication::translate("Widget", "Generar bolas", nullptr));
     } // retranslateUi
 
 };
